@@ -1,4 +1,5 @@
 <template>
+  <!-- 顶部导航栏组件 -->
   <div class="top-nav-container">
     <!-- 歌单列表icon图标 -->
     <i class="iconfont icon-31liebiao"></i>

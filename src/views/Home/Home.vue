@@ -6,6 +6,8 @@
     <SwiperTop></SwiperTop>
     <!-- 图标列表 -->
     <IconList></IconList>
+    <!-- 发现好歌单 -->
+    <MusicList></MusicList>
   </div>
 </template>
 
@@ -13,11 +15,13 @@
 import TopNav from '@/components/TopNav/TopNav'
 import SwiperTop from '@/components/SwpierTop/SwiperTop'
 import IconList from '@/components/IconList/IconList'
+import MusicList from '@/components/MusicList/MusicList'
 export default {
   components: {
     TopNav,
     SwiperTop,
-    IconList
+    IconList,
+    MusicList
   }
 }
 </script>

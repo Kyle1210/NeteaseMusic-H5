@@ -7,12 +7,12 @@
     <!-- 歌单列表部分 -->
     <div class="list">
       <van-swipe :loop="false" :width="150" :show-indicators="false">
-        <van-swipe-item v-for="(item,index) in musicList" :key="index">
-          <img :src="item.picUrl" alt="">
-          <span class="iconfont icon-24gl-play play-count">
-            <span>{{numberTransform(item.playCount)}}</span>
-          </span>
-          <span class="text">{{item.name}}</span>
+        <van-swipe-item v-for="(item,index) in musicList" :key="index" @click="goToMusicList(item.id)">
+            <img :src="item.picUrl" alt="">
+            <span class="iconfont icon-24gl-play play-count">
+              <span>{{numberTransform(item.playCount)}}</span>
+            </span>
+            <span class="text">{{item.name}}</span>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -34,6 +34,17 @@ export default {
   },
 
   methods: {
+    // 跳转到歌单页
+    goToMusicList (musicListId) {
+      this.$router.push({
+        path: '/songmenu',
+        name: 'SongMenu',
+        params: {
+          id: musicListId
+        }
+      })
+    },
+
     // 获取发现歌单数据
     async getMusicList () {
       const res = await reqGetMusicList()
@@ -77,36 +88,36 @@ export default {
     .van-swipe {
       height: 100%;
       // overflow: visible;
-        .van-swipe-item {
-          box-sizing: border-box;
-          padding: 0 .1rem;
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          .play-count {
-            color: #fff;
-            font-size: 0.3rem;
-            position: absolute;
-            top: 0.2rem;
-            right: 0.2rem;
-            span {
-              margin-left: 0.06rem;
-            }
-          }
-          img {
-            height: 2.8rem;
-            border-radius: 0.2rem;
-          }
-          .text {
-            flex: 1;
-            margin-top: .1rem;
-            font-size: .28rem;
-            line-height: .36rem;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
+      .van-swipe-item {
+        box-sizing: border-box;
+        padding: 0 0.1rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        .play-count {
+          color: #fff;
+          font-size: 0.3rem;
+          position: absolute;
+          top: 0.2rem;
+          right: 0.2rem;
+          span {
+            margin-left: 0.06rem;
           }
         }
+        img {
+          height: 2.8rem;
+          border-radius: 0.2rem;
+        }
+        .text {
+          flex: 1;
+          margin-top: 0.1rem;
+          font-size: 0.28rem;
+          line-height: 0.36rem;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+      }
     }
   }
 }

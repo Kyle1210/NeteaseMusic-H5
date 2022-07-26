@@ -50,7 +50,6 @@ export default {
       const res = await reqGetMusicList()
       if (res.data.code === 200) {
         this.musicList = res.data.result
-        console.log(this.musicList)
       }
     },
 

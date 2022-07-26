@@ -29,7 +29,6 @@ export default {
       const { data: res } = await reqGetBanner()
       if (res.code === 200) {
         this.images = res.banners
-        console.log(this.images)
       } else {
         Toast.fail('加载轮播图失败.')
       }

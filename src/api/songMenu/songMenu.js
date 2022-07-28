@@ -1,4 +1,4 @@
 import request from '@/api/request'
 
 // 获取歌单详情
-export const reqGetMusicList = (id) => request.get(`/playlist/detail?id=${id}`)
+export const reqGetMusicDetail = (id) => request.get(`/playlist/detail?id=${id}`)

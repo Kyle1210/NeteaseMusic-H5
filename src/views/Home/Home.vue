@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-container">
     <!-- 头部导航栏 -->
     <TopNav></TopNav>
     <!-- 轮播图 -->
@@ -26,6 +26,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.home-container {
+  padding: .16rem;
+}
 </style>

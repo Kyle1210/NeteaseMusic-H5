@@ -1,36 +1,24 @@
 <template>
   <div>
-    <SongMenuTop :playList="musicList"></SongMenuTop>
+    <SongMenuTop></SongMenuTop>
+    <SongList></SongList>
   </div>
 </template>
 
 <script>
-import { reqGetMusicList } from '@/api/songMenu/songMenu.js'
 import SongMenuTop from '@/components/SongMenuTop/SongMenuTop'
+import SongList from '@/components/SongList/SongList'
 export default {
   name: 'SongMenu',
   components: {
-    SongMenuTop
+    SongMenuTop,
+    SongList
   },
 
   created () {
-    this.getMusicList(this.$route.params.id)
-  },
-
-  data () {
-    return {
-      musicList: {}
-    }
-  },
-
-  methods: {
-    // 获取歌单详情
-    async getMusicList (id) {
-      const { data: res } = await reqGetMusicList(id)
-      if (res.code === 200) {
-        this.musicList = res.playlist
-        console.log('musicList', this.musicList)
-      }
+    // 将传过来的id本地化储存，用于解决歌单页刷新后数据丢失的问题
+    if (this.$route.params.id) {
+      sessionStorage.setItem('musicDetailId', this.$route.params.id)
     }
   }
 }

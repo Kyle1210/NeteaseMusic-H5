@@ -19,7 +19,7 @@
       <div class="img">
         <img :src="playList.coverImgUrl" alt="">
         <span class="play-count">
-          <i class="iconfont icon-bofang1"></i>
+          <i class="iconfont icon-24gf-play"></i>
           <span>{{numberTransform}}</span>
         </span>
       </div>
@@ -60,18 +60,28 @@
 
 <script>
 import { bigNumberTransform } from '@/utils/bigNumberTransform.js'
+import { reqGetMusicDetail } from '@/api/songMenu/songMenu.js'
 export default {
   name: 'SongMenuTop',
-  props: {
-    playList: {
-      type: Object,
-      default: undefined
+  created () {
+    this.getMusicDetail()
+  },
+  data () {
+    return {
+      showPage: false,
+      playList: {}
     }
   },
 
-  data () {
-    return {
-      showPage: false
+  methods: {
+    // 根据id获取歌单详情数据
+    async getMusicDetail () {
+      const { data: res } = await reqGetMusicDetail(sessionStorage.getItem('musicDetailId'))
+      if (res.code === 200) {
+        this.playList = res.playlist
+        // 数据请求成功，渲染页面
+        this.showPage = true
+      }
     }
   },
 
@@ -79,20 +89,13 @@ export default {
     numberTransform () {
       return bigNumberTransform(this.playList.playCount)
     }
-  },
-
-  watch: {
-    // 用于确保父组件传过来的值接收成功后在渲染页面
-    playList () {
-      this.showPage = true
-    }
   }
 }
 </script>
 
 <style lang="less" scoped>
 .song-menu-top-container {
-
+  padding: .16rem;
   .fixbg {
     position: fixed;
     width: 100%;
@@ -148,7 +151,7 @@ export default {
         position: absolute;
         top: .1rem;
         right: .2rem;
-        .icon-bofang1 {
+        .icon-24gf-play {
         font-size: .24rem;
         margin-right: .06rem;
       }

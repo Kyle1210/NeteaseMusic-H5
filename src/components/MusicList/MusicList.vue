@@ -22,6 +22,7 @@
 <script>
 import { reqGetMusicList } from '@/api/home/home.js'
 import { bigNumberTransform } from '@/utils/bigNumberTransform.js'
+import { mapMutations } from 'vuex'
 export default {
   created () {
     this.getMusicList()
@@ -34,7 +35,9 @@ export default {
   },
 
   methods: {
-    // 跳转到歌单页
+    ...mapMutations(['SET_PLAY']),
+
+    // 跳转到歌单页，并将歌曲播放状态改为未播放
     goToMusicList (musicListId) {
       this.$router.push({
         path: '/songmenu',
@@ -43,6 +46,7 @@ export default {
           id: musicListId
         }
       })
+      this.SET_PLAY(true)
     },
 
     // 获取发现歌单数据

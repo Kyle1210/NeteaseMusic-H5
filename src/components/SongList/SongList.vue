@@ -71,6 +71,7 @@ export default {
   border-top-right-radius: .4rem;
   border-top-left-radius: .4rem;
   background-color: #fff;
+  padding-bottom: 1.6rem;
   .head {
     padding: .16rem;
     display: flex;

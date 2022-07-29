@@ -3,7 +3,7 @@
     <div class="avatar">
       <img :src="playList[defaultIndex].al.picUrl" alt="">
     </div>
-    <div class="text">
+    <div class="text" @click="displayMusicPopup">
       <div class="music-name">{{playList[defaultIndex].name}}</div>
       <span>横滑可以切换上下首歌哦</span>
     </div>
@@ -15,12 +15,25 @@
       <i class="iconfont icon-zu"></i>
       <audio ref="playList" :src="`https://music.163.com/song/media/outer/url?id=${playList[defaultIndex].id}.mp3`"></audio>
     </div>
+    <!-- 弹出层 -->
+    <MusicPopup :musicDetail="playList[defaultIndex]" ref="musicPopup" :showMusicPopup="showPopup"></MusicPopup>
   </div>
 </template>
 
 <script>
+import MusicPopup from '@/components/MusicPopup/MusicPopup'
 import { mapMutations, mapState } from 'vuex'
 export default {
+  data () {
+    return {
+      showPopup: false
+    }
+  },
+
+  components: {
+    MusicPopup
+  },
+
   computed: {
     ...mapState(['playList', 'defaultIndex', 'noPlay'])
   },
@@ -34,6 +47,11 @@ export default {
       } else {
         this.SET_PLAY(true)
       }
+    },
+
+    // 展示弹出层
+    displayMusicPopup () {
+      this.$refs.musicPopup.updateShow()
     }
   },
 

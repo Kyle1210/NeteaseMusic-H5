@@ -7,7 +7,7 @@
         <!-- 头部 -->
         <div class="head">
           <div class="left">
-            <i class="iconfont icon-zuojiantou"></i>
+            <i class="iconfont icon-zuojiantou" @click="updateShow"></i>
             <div class="text">
               <div class="music-name">{{musicDetail.name}}</div>
               <span class="music-author">{{musicDetail.ar[0].name}}</span>
@@ -18,23 +18,47 @@
           </div>
 
         </div>
-      <!-- 中间部分 -->
-      <div class="content">
-        <img class="needle" src="@/assets/needle.png" alt="">
-        <!-- 图标 -->
-        <img class="al" :src="musicDetail.al.picUrl" alt="">
-        <img class="disc" src="@/assets/disc.png" alt="">
-      </div>
+        <!-- 中间部分 -->
+        <div class="content">
+          <img class="needle" src="@/assets/needle.png" alt="">
+          <!-- 图标 -->
+          <img class="al" :src="musicDetail.al.picUrl" alt="">
+          <img class="disc" src="@/assets/disc.png" alt="">
+        </div>
+        <!-- 底部 -->
+        <div class="base">
+          <div class="top">
+            <!-- icon图标 -->
+            <i class="iconfont icon-aixin"></i>
+            <i class="iconfont icon-xiazai"></i>
+            <i class="iconfont icon-yinle"></i>
+            <i class="iconfont icon-xiaoxi"></i>
+            <i class="iconfont icon-liebiao-"></i>
+          </div>
+          <div class="pro-bar"></div>
+          <div class="bottom">
+            <i class="iconfont icon-danxunhuan"></i>
+            <i class="iconfont icon-shangyishoushangyige"></i>
+            <i class="iconfont icon-bofang" @click="playMusicOrPauseMusic" v-if="noPlay"></i>
+            <i class="iconfont icon-zanting" @click="playMusicOrPauseMusic" v-else></i>
+            <i class="iconfont icon-xiayigexiayishou"></i>
+            <i class="iconfont icon-zu"></i>
+          </div>
+        </div>
       </div>
     </van-popup>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   props: {
     musicDetail: {
       type: Object
+    },
+    playMusicOrPauseMusic: {
+      type: Function
     }
   },
 
@@ -49,6 +73,10 @@ export default {
     updateShow () {
       this.show = !this.show
     }
+  },
+
+  computed: {
+    ...mapState(['noPlay'])
   }
 }
 </script>
@@ -60,12 +88,14 @@ export default {
   width: 100%;
   height: 100%;
   z-index: -999;
-  filter: blur(.6rem);
+  filter: blur(0.6rem);
 }
 
-.music-detail{
+.music-detail {
+  position: relative;
+  height: 100%;
   .head {
-    padding: .4rem .16rem;
+    padding: 0.4rem 0.16rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -74,20 +104,20 @@ export default {
       display: flex;
       align-items: center;
       i {
-        margin-right: .4rem;
-        font-size: .56rem;
+        margin-right: 0.4rem;
+        font-size: 0.56rem;
       }
       .music-name {
-        font-size: .3rem;
+        font-size: 0.3rem;
       }
       .music-author {
-        font-size: .24rem;
+        font-size: 0.24rem;
         color: gray;
       }
     }
     .right {
       i {
-        font-size: .56rem;
+        font-size: 0.56rem;
       }
     }
   }
@@ -105,7 +135,7 @@ export default {
       left: 46%;
       transform-origin: 0 0;
       transform: rotate(-20deg);
-      transition:  all 2S;
+      transition: all 2s;
     }
     .disc {
       width: 5rem;
@@ -120,6 +150,33 @@ export default {
       border-radius: 50%;
       position: absolute;
       bottom: 3.14rem;
+    }
+  }
+
+  .base {
+    .top {
+      display: flex;
+      justify-content: space-around;
+      i {
+        font-size: .5rem;
+        color: #fff;
+      }
+    }
+
+    .bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      bottom: .4rem;
+      i {
+        font-size: .5rem;
+        color: #fff;
+      }
+      .icon-bofang , .icon-zanting {
+        font-size: .7rem;
+      }
     }
   }
 }

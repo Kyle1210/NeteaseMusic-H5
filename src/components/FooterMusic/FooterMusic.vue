@@ -16,7 +16,7 @@
       <audio ref="playList" :src="`https://music.163.com/song/media/outer/url?id=${playList[defaultIndex].id}.mp3`"></audio>
     </div>
     <!-- 弹出层 -->
-    <MusicPopup :musicDetail="playList[defaultIndex]" ref="musicPopup" :showMusicPopup="showPopup"></MusicPopup>
+    <MusicPopup :playMusicOrPauseMusic="playMusicOrPauseMusic" :musicDetail="playList[defaultIndex]" ref="musicPopup" :showMusicPopup="showPopup"></MusicPopup>
   </div>
 </template>
 
